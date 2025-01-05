@@ -117,7 +117,7 @@ RTX3090 have 284 TOPS at INT8, compared to 16 TOPS on the M2 line and 45 - 50 TO
 
 -------------------
 
-I have a 64 core Epyc Milan workstation with 8channels of 3200mhz ram, it gives me around 2,5t/s with the airoboros-65b-gpt4-1.4.ggmlv3.q5_K_S model. Not too impressive i think. Around 32 threads give me the fastest inference, 64 slows it to ~2t/s. On my 5800x3d rig i got 0,9t/s, but with a q4 quant.
+I have a 64 core Epyc Milan workstation with 8 channels of 3200mhz ram, it gives me around 2,5t/s with the airoboros-65b-gpt4-1.4.ggmlv3.q5_K_S model. Not too impressive i think. Around 32 threads give me the fastest inference, 64 slows it to ~2t/s. On my 5800x3d rig i got 0,9t/s, but with a q4 quant.
 
 -------------------
 
