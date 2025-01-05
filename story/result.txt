@@ -1,0 +1,15 @@
+﻿					logic		pass	KB
+gemini				10			✓
+bing-copilot		4			✓
+gpt4o-mini			5			✓
+claude3 haiku		6			✓
+mixtral 8x7b		5			✓
+llama3.1:70b		10			✓
+llama3.1:8b			0			✘
+tinyllama:1.1b		1			✓
+phi3:3.8b			1			✓
+qwen2:0.5b			1			✓
+qwen2:1.5b			4			✓
+
+
+

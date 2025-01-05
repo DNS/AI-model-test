@@ -1,0 +1,15 @@
+﻿
+
+					pass
+gemini
+bing-copilot
+gpt4o-mini
+claude3 haiku
+mixtral 8x7b
+llama3.1:70b
+llama3.1:8b
+tinyllama:1.1b
+phi3:3.8b
+qwen2:1.5b
+qwen2:0.5b			✘✓
+

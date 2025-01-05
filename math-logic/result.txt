@@ -1,0 +1,51 @@
+﻿3 apples divided equally to 5 people, how much apple every person get?
+
+					pass
+gemini				✓
+bing-copilot		✓
+gpt4o-mini			✓
+claude3 haiku		✓
+mixtral 8x7b		✓
+llama3.1:70b		✓
+llama3.1:8b			✓
+tinyllama:1.1b		✘
+phi3:3.8b			✓
+qwen2:1.5b			✘
+qwen2:0.5b			✘✓
+
+
+-------------------
+
+if bob borrow $100 from jordan with interest rate of 10 percent per year. how much money bob owe to jordan after 10 years?
+
+					pass
+gemini				✘
+bing-copilot		✓
+gpt4o-mini			✓
+claude3 haiku		✓
+mixtral 8x7b		✘
+llama3.1:70b		✘✓
+llama3.1:8b			✓
+tinyllama:1.1b		✘
+phi3:3.8b			✓
+qwen2:1.5b			✘
+qwen2:0.5b			✘
+
+
+-------------------
+if bob borrow $100 from jordan with interest rate of 10 percent (continuously compounded). how much money bob owe to jordan after 10 years?
+
+					pass
+gemini				✓
+bing-copilot		✓
+gpt4o-mini			✓
+claude3 haiku		✓
+mixtral 8x7b		✓
+llama3.1:70b		✓
+llama3.1:8b			✓
+tinyllama:1.1b		✘
+phi3:3.8b			✘
+qwen2:1.5b			✘
+qwen2:0.5b			✘
+
+

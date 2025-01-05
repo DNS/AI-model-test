@@ -1,0 +1,616 @@
+﻿
+# Download
+https://ollama.com/
+
+-----------------
+
+# first time run (download default model)
+ollama run llama3.1:8b			# 4.7GB
+
+ollama serve
+
+ollama list
+ollama rm <model name>
+
+-----------------
+# parameter
+
+/set parameter num_ctx 30000
+/set parameter num_ctx 16384
+/set parameter num_ctx 128000
+
+
+Llama3 70b has 8k context, not 128k
+GPT-4o had a context length of 128k with an output token limit of 4096. Llama3.1 has a context length of 128k with an output token limit of 2048.
+
+-----------------
+
+
+http://localhost:11434/
+
+curl -X POST http://localhost:11434/api/pull -d '{"model":"llama3.1"}'
+curl -X POST http://localhost:11434/api/generate -d '{"model":"llama3.1", "prompt":"Why is the sky blue?", "stream": false}'
+
+$a = (Invoke-WebRequest -method POST -Body '{"model":"llama3.1", "prompt":"Why is the sky blue?", "stream": false}' -Uri http://localhost:11434/api/generate ).Content | ConvertFrom-json; $a
+
+# use all cpu cores, set system ENV
+OLLAMA_NUM_THREADS=8
+OLLAMA_LLM_LIBRARY=cpu_avx
+
+
+--------------------
+
+
+# install other ai models
+https://ollama.com/library?sort=popular
+
+# llama3.1 (facebook)
+ollama run llama3.1:8b			# 4.7GB
+
+# tinyllama (facebook)
+ollama run tinyllama:1.1b		# 638MB
+
+# phi3 (microsoft)
+ollama run phi3:3.8b			# 2.2GB
+
+# qwen2 (alibaba)
+ollama run qwen2:0.5b			# 352MB
+ollama run qwen2:1.5b			# 935MB
+
+ollama run qwen2:0.5b --verbose
+
+
+-------------------
+
+# cost to write 100000 token
+
+ChatGPT-3.5-turbo costs 0.002 USD for 1000 token
+0.002*15500=31 IDR
+31*100000/1000=3100 IDR
+
+RTX 4060 Ti (160 W), llama3:8b-q8_0 -> 50 tok/s
+1 kwh -> 1400 IDR
+100000/50 = 2000
+2000*160/1000/3600 = 0.0888888888889 kWh
+1400*0.0888888888889 = 124.4 IDR
+
+RX 7900 XT (315 W), llama3:8b-q8_0 -> 99 tok/s
+1 kwh -> 1400 IDR
+100000/99 = 1010
+1010*315/1000/3600 = 0.088375 kWh
+1400*0.088375 = 123.725 IDR
+
+-------------------
+# Flux, Stable diffusion
+
+RX 7800 XT
+one image in 72s or 3.7 s/it when running the default workflow
+
+RTX 4060 Ti
+80 seconds at 1024x1024 x 20 steps
+
+
+On 8GB M1 MacBook Air, DiffusionBee takes around 30 seconds to generate an image.
+
+For the exact same workflow both I'm seeing around 7.5 it/s on the RTX3060 12GB compared to about 2 it/s on my Macbook.
+
+
+-------------------
+
+# BENCHMARK: AMD FX-8300 8-Core CPU
+
+								token/s				context
+llama3.1:8b						0.79 tokens/s		128k
+llama3.2:3b-instruct-q8_0		3.73 tokens/s
+llama3.2:3b-instruct-q4_K_M		4.08 tokens/s
+llama3.2:1b-instruct-q8_0		7.03 tokens/s
+tinyllama:1.1b					5.08 tokens/s
+phi3:3.8b						1.48 tokens/s
+qwen2:0.5b						11.17 tokens/s
+qwen2:1.5b						3.84 tokens/s
+
+
+-------------------
+
+RTX3090 have 284 TOPS at INT8, compared to 16 TOPS on the M2 line and 45 - 50 TOPS on the upcoming 8000 APU ryzen cpus 
+
+
+-------------------
+
+I have a 64 core Epyc Milan workstation with 8channels of 3200mhz ram, it gives me around 2,5t/s with the airoboros-65b-gpt4-1.4.ggmlv3.q5_K_S model. Not too impressive i think. Around 32 threads give me the fastest inference, 64 slows it to ~2t/s. On my 5800x3d rig i got 0,9t/s, but with a q4 quant.
+
+-------------------
+
+4.5t/s on 70b on my epyc cpu
+the speed isn't really that different with a gpu installed. maybe 1t/s faster on 70b
+
+-------------------
+
+Text: base model
+Instruct: base model + instruction/response format
+
+⮞ BENCHMARK result from internet:
+
+
+# Extensive LLama.cpp benchmark & more speed on CPU, 7b to 30b, Q2_K, to Q6_K and FP16, X3D, DDR-4000 and DDR-6000
+Text generation in FP16 is way slower than Q4_0 of a model that has twice the number of parameters.
+
+The only time people noticed anything from fp16 to 8bit is on coding models. There is a chart somewhere. It's like less than 1% off of perplexity.
+
+From 8 to 4 it gets mildly dumber. Then it goes exponentially dumber towards 2 and 1.
+
+
+
+# Tinyllama
+Phenom II X4 955 = 2.8 tokens/s
+AMD FX 8300 = 13 tokens/s
+Intel i7-2630QM = 14.5 tokens/s
+AMD Ryzen 1600 = 37 tokens/s
+AMD Ryzen 5600X = 60 tokens/s
+Nvidia GTX 970 = 61 tokens/s
+
+
+
+# Llama2 70b
+Ryzen 3600 = 0.6 tok/s
+
+# dolphin-2.7-mixtral-8x7b-GGUF
+i5-10400F + RTX 3060 = 0.65 tok/s
+
+# dolphin-2.7-mixtral-8x7b.Q5_K_M.gguf
+Ryzen 7900X + Radeon 7900XT = 7 tok/s
+
+
+# Llama2 7B
+i5-6600k = 13.70 tokens/s ???
+RTX 3060 12 GB = 35 tokens/s ???
+RTX 4060 Ti 16GB = 12 tokens/s
+
+# Mistral 7B
+RTX 3060 12GB = 59 tokens/s
+RTX 4060 Ti 16GB = 44 tokens/s
+RTX 4070 12GB = 70 tokens/s
+
+# Llama3 8B
+1660 Ti = 5 tokens/s
+RTX 4060 8GB = 10 tokens/s
+Mac M2 pro, 16GB = 24.42 tokens/s
+RX 6600 = 29 tokens/s
+
+# Llama-3.1-8B-Instruct-Q8_0, 8k context
+RX 6700 XT = 10.73T/s
+
+# XFX RX 7900 GRE AI benchmark Ollama
+# https://www.reddit.com/r/AMDGPU/comments/1cexdd8/xfx_rx_7900_gre_ai_benchmark_ollama/
+
+
+
+# Llama3.1 8b q4 with 100k context size
+780M IGP - 11.95 tok/s
+8700G CPU (8c/16t zen4) - 9.43 tok/s
+RTX 4090 24GB - 74.4 tok/s
+7950X3D CPU - 8.48 tok/s
+
+RTX 4060 Ti 16GB = 22.32 tok/s	???
+Ryzen 7900 CPU = 6.78 tok/s		???
+
+
+# Llama3 70B
+2x RTX 3090: 20.45 tokens/s
+RTX 4090: 7 t/s
+
+# Llama3 70B q8
+5800X3D CPU = 1 t/s
+
+# Mistral 8x7B (similar to llama2 70b)
+GPU: 4090		-> 23.06 tokens/s
+CPU: 7950X3D	-> 6.99 tokens/s
+
+
+-------------------
+i9-14900K, 128 GB
+
+iambe-rp-v3-20b.Q6_K.gguf --prompt "Once upon a time" -t 32 -p 0 -n 256
+
+./main -m iambe-rp-v3-20b.Q6_K.gguf --prompt "Once upon a time" -t 24 -p 0 -n 256
+llama_print_timings: ...  (  2,92 tokens per second)
+
+./main -m ../LLModels/pygmalion-2-13b.Q5_K_M.gguf --prompt "Once upon a time" -p 0 -n 128
+-> Averages at 5.66 t/s
+
+-------------------
+
+⮞ RTX 4060 Ti 16GB Benchmark
+
+34B
+llama.cpp : samantha-1.11-codellama-34b.Q4_K_M.gguf
+n-gpu-layers : 0/51 >> Output: 1.89 t/s (82 tokens, context 673)
+n-gpu-layers : 32/51 >> Output: 3.00 t/s (22 tokens, context 624) vram ~16GB
+n-gpu-layers : 36/51 >> (OOM shortly after loading)
+
+llama.cpp : samantha-1.11-codellama-34b.Q3_K_S.gguf
+n-gpu-layers : 0/51 >> Output: 2.36 ts/s (105 tokens, context 663)
+n-gpu-layers : 32/51 >> Output: 3.91 t/s (28 tokens, context 723) vram 12.5GB
+n-gpu-layers : 36/51 >> Output: 5.22 t/s (68 tokens, context 641) vram 13.5GB
+n-gpu-layers : 44/51 >> Output: 6.58 t/s (55 tokens, context 788) vram ~16GB
+
+13B
+ExLlama_HF : WizardLM-1.0-Uncensored-Llama2-13B-GPTQ
+Full GPU >> Output: 20.19 t/s (188 tokens, context 773) vram ~11GB
+Full GPU >> Output: 12.14 t/s, (200 tokens, context 3864) vram ~14GB
+
+ExLlama : WizardLM-1.0-Uncensored-Llama2-13B-GPTQ
+Full GPU >> Output: 23.59 t/s (72 tokens, context 602) vram ~11GB
+
+7B
+ExLlama_HF : Dolphin-Llama2-7B-GPTQ
+Full GPU >> Output: 33.14 t/s (111 tokens, context 720) vram ~8GB
+
+ExLlama : Dolphin-Llama2-7B-GPTQ
+Full GPU >> Output: 42.14 t/s (134 tokens, context 780) vram ~8GB
+
+-------------------
+
+1 pages (A4) = 500 words
+1 pages (novel format) = 250 words
+
+-------------------
+
+# AI SPEED RATIO
+
+CPU		GPU		NPU
+1		10		20			# single precision FP
+1		6					# double precision FP
+
+
+
+
+=====================================================
+
+# llama
+https://github.com/ggerganov/llama.cpp
+
+
+# example (chat)
+/llama-cli.exe -m models\gemma-1.1-7b-it.Q4_K_M.gguf -cnv --chat-template gemma
+.\llama-cli.exe -m 'C:\Users\dns\.ollama\models\blobs\sha256-8de95da68dc485c0889c205384c24642f83ca18d089559c977ffc6a3972a71a8' -cnv --chat-template qwen2:0.5b
+
+# example (One-and-done) qwen2:0.5b
+.\llama-cli.exe -m 'C:\Users\dns\.ollama\models\blobs\sha256-8de95da68dc485c0889c205384c24642f83ca18d089559c977ffc6a3972a71a8' -p "I believe the meaning of life is" -n 128
+.\llama-cli.exe -m 'C:\Users\dns\.ollama\models\blobs\sha256-8de95da68dc485c0889c205384c24642f83ca18d089559c977ffc6a3972a71a8' -p "I believe the meaning of life is" --mirostat 2
+
+# llama3.1 FAIL to allocate buffer
+.\llama-cli.exe -m 'C:\Users\dns\.ollama\models\blobs\sha256-8eeb52dfb3bb9aefdf9d1ef24b3bdbcfbe82238798c4b918278320b6fcef18fe' --log-disable -p "I believe the meaning of life is" -n 128
+
+# tinyllama
+.\llama-cli.exe -m 'C:\Users\dns\.ollama\models\blobs\sha256-2af3b81862c6be03c769683af18efdadb2c33f60ff32ab6f83e42c043d6c7816' -p "I believe the meaning of life is" --mirostat 2
+
+
+--log-disable
+
+
+Measure-Command { .\llama-cli.exe -m 'C:\Users\dns\.ollama\models\blobs\sha256-8de95da68dc485c0889c205384c24642f83ca18d089559c977ffc6a3972a71a8' --log-disable -p 'write 1 pages story about vampire vs werewolf'  | Out-File '..\vampire-avx-qwen2-0.5b.txt' }
+
+noavx: 1.70 min
+avx:
+
+
+=====================================================
+$model = @('llama3.1:8b', 'tinyllama:1.1b', 'phi3:3.8bqwen2:0.5b', 'qwen2:1.5b', 'qwen2:0.5b')
+$model = @('qwen2:1.5b')
+foreach ($m in $model) {
+	'what fruit that eaten by adam and eve before falling into sin?' | ollama run $m --verbose
+}
+
+
+'what fruit that eaten by adam and eve before falling into sin?' | ollama run qwen2:0.5b --verbose
+
+
+@('llama3.1:8b', 'tinyllama:1.1b', 'phi3:3.8b', 'qwen2:1.5b', 'qwen2:0.5b')
+
+llama3.1:8b					✓			0.79 tokens/s
+tinyllama:1.1b				✘			5.08 tokens/s
+phi3:3.8b					✘			1.48 tokens/s
+qwen2:0.5b					✘			11.17 tokens/s				8.33 min/25000 words
+qwen2:1.5b					✘			3.84 tokens/s
+
+=====================================================
+
+'Write story title and then the title for every chapters (with 1 paragraph of explanation what happenning in every chapter) in a "vampire vs werewolf story"' | ollama run qwen2:0.5b --verbose
+
+
+$s = @'
+Title: "The Whispering Woods"
+
+Chapters:
+
+1. Chapter 1 - The Beginning
+
+The small town, surrounded by dense forest, was not as charming as it seemed at first glance. A mysterious figure, the true reason behind the forest's beauty had been unknown to many. As he
+approached from afar, the girl could sense something peculiar about him.
+
+2. Chapter 2 - The Night
+
+As night fell on the town, a strange energy began to rise around her. She was suddenly surrounded by wolves, each one growling in fear of the other. They were not just any ordinary wolves, but
+bloodhounds. They would attack at any time and cause chaos wherever they went.
+
+3. Chapter 3 - The Hunt
+
+The girl was trapped in a forest, surrounded by a pack of angry wolves. She knew she had no choice but to escape. But how? She was the only one in her town who could survive the pack's attacks
+without help. As she stumbled through the dense woods, she realized that he had been chosen for his task.
+
+4. Chapter 4 - The Fear
+
+As she tried to escape from the pack, the girl noticed something strange happening around her. She found herself being watched by a man in a wolf suit. He had come from the forest and was helping
+her. Soon after, they were surrounded by wolves too.
+
+5. Chapter 5 - The End
+
+In the end, the girl managed to escape the pack. She returned home with a new set of lessons learned. But for her, it was a long road ahead as she knew that this time, she had never seen such
+creatures before.
+
+
+------------------------
+
+From the template above, modify the story of "chapter 1" to be as long as possible.
+
+Make "chapter 1" to be as long as possible.
+
+'@
+
+$s | ollama run qwen2:0.5b --verbose
+
+
+
+
+
+=====================================================
+
+# Chemistry notation superscript/subscript output
+
+convert numbers to unicode subscript: h2 + o2 -> h2o
+
+gemini						✓
+bing-copilot				✘
+gpt4o-mini					✓
+claude3 haiku				✓
+mixtral 8x7b				✘
+llama3.1:70b				✓
+llama3.1:8b					✓
+tinyllama:1.1b				✘
+phi3:3.8b					✘
+qwen2:1.5b					✘
+qwen2:0.5b					✘
+
+
+
+=====================================================
+
+
+# Chemistry question
+
+list melting point in row/column format (in celcius): alf3, alcl3, albr3
+
+gemini						✓
+bing-copilot				✓
+gpt4o-mini					✓
+claude3 haiku				✓
+mixtral 8x7b				✘
+llama3.1:70b				✓
+llama3.1:8b					✘
+llama3.2:3b-instruct-q8_0	✘
+llama3.2:3b-instruct-q4_K_M	✘
+llama3.2:1b-instruct-q8_0	✘
+tinyllama:1.1b				✘
+phi3:3.8b					✘
+qwen2:1.5b					✘
+qwen2:0.5b					✘
+
+
+=====================================================
+# Chemistry question
+give very short answer. how much oxygen (in meter cubic) needed to burn 1 kg of carbon graphite?
+
+C + O2 -> CO2
+12  32
+83.25  62.5				mol (1 kg C)
+1	2					mol
+1						kg
+
+1 kg O2 = 0.7 m3
+2 kg O2 = 1.4 m3
+
+gemini							2.67 kg of oxygen, 1.86 cubic meters of oxygen		✘
+bing-copilot					2.67 cubic meters of oxygen							✘
+gpt4o-mini						2.67 cubic meters									✘
+claude3 haiku					2.67 m3												✘
+mixtral 8x7b					3.75 m³
+llama3.1:70b					8.53 cubic meters 
+llama3.1:8b						2.65 m³; 80 m³ (based on complete combustion: C + O2 -> CO2, requiring 8 moles of O2 per mole of C); 0.5 m³
+llama3.2:3b-instruct-q8_0		5.93 cubic meters of oxygen
+llama3.2:3b-instruct-q4_K_M		2.83 m³ of oxygen
+llama3.2:1b-instruct-q8_0		0.08-0.1 kg of O2, 95 meters cubic
+
+
+
+=====================================================
+# translate ID to EN
+
+$s = @'
+translate this text to english:
+Seorang pemuda berinisial ZA membunuh pacarnya yang berinisial CN dengan menggunakan sebilah pisau.
+Kejadian itu terjadi tanggal 19 Mei 2004.
+'@
+
+$model = @('llama3.1:8b', 'tinyllama:1.1b', 'phi3:3.8b', 'qwen2:1.5b', 'qwen2:0.5b')
+
+foreach ($m in $model) {
+	"----------------`n`nModel: $m`n"
+	$s | ollama run $m --verbose
+}
+
+
+
+llama3.1:70b		10/10		✓
+llama3.1:8b			10/10		✓		0.84 tokens/s
+tinyllama:1.1b		1/10		✘		5.11 tokens/s
+phi3:3.8b			9/10		✓		1.54 tokens/s
+qwen2:1.5b			8/10		✓		3.54 tokens/s
+qwen2:0.5b			0/10		✘		10.81 tokens/s
+
+=====================================================
+
+# make the story longer
+
+$s = @'
+translate this text to english, then extend and make the story longer as possible:
+Seorang pemuda berinisial ZA membunuh pacarnya yang berinisial CN dengan menggunakan sebilah pisau.
+Kejadian itu terjadi tanggal 19 Mei 2004.
+'@
+
+$model = @('llama3.1:8b', 'tinyllama:1.1b', 'phi3:3.8b', 'qwen2:1.5b', 'qwen2:0.5b')
+
+foreach ($m in $model) {
+	"---------------------------`n`nModel: $m`n"
+	$s | ollama run $m --verbose
+}
+
+
+
+llama3.1:70b		10/10		✓
+llama3.1:8b			0/10		✘		0.88 tokens/s
+tinyllama:1.1b		3/10		✘		4.50 tokens/s
+phi3:3.8b			10/10		✓		1.36 tokens/s
+qwen2:0.5b			1/10		✘		9.37 tokens/s
+qwen2:1.5b			5/10		✓		3.24 tokens/s
+
+
+=====================================================
+
+# make the story longer + hallucinate
+
+$s = @'
+translate this text to english, then extend and make the story longer as possible, use creativity and you can hallucinate and write whatever you want:
+Seorang pemuda berinisial ZA membunuh pacarnya yang berinisial CN dengan menggunakan sebilah pisau.
+Kejadian itu terjadi tanggal 19 Mei 2004.
+'@
+
+$model = @('llama3.1:8b', 'tinyllama:1.1b', 'phi3:3.8b', 'qwen2:1.5b', 'qwen2:0.5b')
+
+foreach ($m in $model) {
+	"---------------------------`n`nModel: $m`n"
+	$r = $m -replace ':', ' '
+	$s | ollama run $m --verbose | Out-File "$r.txt"
+}
+
+
+# translate this text to bahasa indonesia:
+
+
+					score		pass	words	translate back to bahasa indonesia
+llama3.1:70b		10/10		✓		513		✓
+llama3.1:8b			0/10		✘		-
+tinyllama:1.1b		1/10		✘		-
+phi3:3.8b			8/10		✓		1266	✘
+qwen2:0.5b			3/10		✓		401
+qwen2:1.5b			5/10		✓		260
+
+=====================================================
+
+how many words in christian protestant bible (including old and new testament)?
+
+
+llama3.1:70b			✓
+llama3.1:8b				✓
+tinyllama:1.1b			✘
+phi3:3.8b				✘
+qwen2:0.5b				✘
+qwen2:1.5b				✘
+
+=====================================================
+
+created nice a title for a story
+write a table of contents
+write chapters title, one at a time
+
+=====================================================
+
+$title = "Vampire's Requiem"
+$topic = "Vampire vs Human"
+
+> "create 10 title for a story about `"$topic`"" | ollama run qwen2:1.5b
+"Vampire Chronicles: Secrets, Love, and the Search for Immortality"
+
+> "write chapters title (include very short synopsis for each title), for a story about `"$topic`"" | ollama run qwen2:1.5b
+Chapter 1: "The Awakening"
+Chapter 2: "The Pursuit"
+Chapter 3: "The Experiment"
+Chapter 4: "The Escape"
+Chapter 5: "The Journey"
+Chapter 6: "The Return"
+Chapter 7: "The Conclusion"
+Chapter 8: "The Future"
+
+
+
+>
+
+
+
+
+
+
+You're an evil vampire, facing a powerless human.
+
+=====================================================
+
+
+
+integrated Qualcomm Hexagon NPU: 45 TOPS (30 tokens/sec), runs 7 billion parameter models
+
+
+
+=====================================================
+
+
+					score		pass	KB
+gpt4o-mini
+claude3 haiku
+mixtral 8x7b
+llama3.1:70b		/10		✓
+llama3.1:8b			/10		✘		-
+tinyllama:1.1b		/10		✘		-
+phi3:3.8b			/10		✓
+qwen2:0.5b			/10		✓
+qwen2:1.5b			/10		✓
+
+
+
+
+
+=====================================================
+
+# GPU SUPPORT
+
+RX470 - RX580: GFX803
+
+Last supported RX470: ROCm 3.5
+Unofficial support: ROCm 5.7 ?
+
+https://github.com/ROCm/ROCm/issues/1073
+
+
+There are serious bugs in rocBLAS on gfx803. The last version that officially supported gfx803 was ROCm 3.5. AMD stopped testing on gfx803 after that, and it was badly broken by the ROCm 3.7 release.
+
+AMD doesn't support gfx803 anymore, so the bugs won't be fixed unless someone from the community can debug and patch them.
+
+
+
+
+
+
+
+
+
+
+
