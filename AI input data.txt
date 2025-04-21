@@ -13,7 +13,7 @@
 
 > Result
  100 0111 0110	llama3.1 70b				❌
-   1 0111 1001  grok 2025					❌
+   1 0111 1001  grok3 (2025)				❌
 0010 0101 1110	win calc					✔
 0010 0101 1110  casio fx-991ex calculator	✔
   10 0101 1110  manual calculation			✔
