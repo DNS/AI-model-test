@@ -100,7 +100,7 @@ For the exact same workflow both I'm seeing around 7.5 it/s on the RTX3060 12GB 
 # BENCHMARK: AMD FX-8300 8-Core CPU
 
 								token/s				context
-llama3.1:8b						0.79 tokens/s		128k
+llama3.1:8b-instruct-q8_0		1.72 tokens/s		128k
 llama3.2:3b-instruct-q8_0		3.73 tokens/s
 llama3.2:3b-instruct-q4_K_M		4.08 tokens/s
 llama3.2:1b-instruct-q8_0		7.03 tokens/s
