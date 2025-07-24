@@ -97,17 +97,35 @@ For the exact same workflow both I'm seeing around 7.5 it/s on the RTX3060 12GB 
 
 -------------------
 
-# BENCHMARK: AMD FX-8300 8-Core CPU
+# BENCHMARK: 
 
+
+
+# AMD FX-8300 8-Core CPU
 								token/s				context
 llama3.1:8b-instruct-q8_0		1.72 tokens/s		128k
 llama3.2:3b-instruct-q8_0		3.73 tokens/s
 llama3.2:3b-instruct-q4_K_M		4.08 tokens/s
 llama3.2:1b-instruct-q8_0		7.03 tokens/s
 tinyllama:1.1b					5.08 tokens/s
-phi3:3.8b						1.48 tokens/s
+phi3:3.8b						1.48 tokens/s         
 qwen2:0.5b						11.17 tokens/s
 qwen2:1.5b						3.84 tokens/s
+
+
+
+# Intel Core Ultra 7 155U
+llama3.1:8b-q4					4.75 tok/s
+llama3.2:3b-q4					10.32 tok/s
+
+
+-------------------
+
+
+# BENCHMARK
+
+integrated Qualcomm Hexagon neural processor unit (NPU) has 45 TOPS
+and runs 7 billion parameter models at roughly 30 tokens/sec.
 
 
 -------------------
