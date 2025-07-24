@@ -201,6 +201,12 @@ RX 6700 XT = 10.73T/s
 # XFX RX 7900 GRE AI benchmark Ollama
 # https://www.reddit.com/r/AMDGPU/comments/1cexdd8/xfx_rx_7900_gre_ai_benchmark_ollama/
 
+# Ryzen 7 7840HS (15 TOPs)
+Llama 3.1 8b-q? 2 tokens/s
+
+# Ryzen 9 AI HX 375/HX 370 (50-55 TOPs)
+Llama 3.1 8b-q? 6-7 tokens/sec
+
 
 
 # Llama3.1 8b q4 with 100k context size
