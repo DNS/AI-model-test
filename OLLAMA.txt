@@ -114,7 +114,9 @@ qwen2:1.5b						3.84 tokens/s
 
 
 # Intel Core Ultra 7 155U
-NPU score: 11 TOPs
+NPU AI Performance: 11 TOPs
+Total AI Performance: 34 TOPS
+llama3.1:8b-instruct-q8_0		 tokens/s
 llama3.1:8b-q4					4.75 tokens/s
 llama3.2:3b-q4					10.32 tokens/s
 
@@ -634,6 +636,7 @@ https://github.com/ROCm/ROCm/issues/1073
 There are serious bugs in rocBLAS on gfx803. The last version that officially supported gfx803 was ROCm 3.5. AMD stopped testing on gfx803 after that, and it was badly broken by the ROCm 3.7 release.
 
 AMD doesn't support gfx803 anymore, so the bugs won't be fixed unless someone from the community can debug and patch them.
+
 
 
 
