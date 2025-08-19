@@ -6,6 +6,7 @@ https://ollama.com/
 
 # first time run (download default model)
 ollama run llama3.1:8b			# 4.7GB
+ollama run --verbose llama3.1:8b-instruct-q8_0
 
 ollama serve
 
@@ -636,6 +637,7 @@ https://github.com/ROCm/ROCm/issues/1073
 There are serious bugs in rocBLAS on gfx803. The last version that officially supported gfx803 was ROCm 3.5. AMD stopped testing on gfx803 after that, and it was badly broken by the ROCm 3.7 release.
 
 AMD doesn't support gfx803 anymore, so the bugs won't be fixed unless someone from the community can debug and patch them.
+
 
 
 
