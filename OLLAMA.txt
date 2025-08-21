@@ -5,8 +5,10 @@ https://ollama.com/
 -----------------
 
 # first time run (download default model)
-ollama run llama3.1:8b			# 4.7GB
+ollama run llama3.1:8b
 ollama run --verbose llama3.1:8b-instruct-q8_0
+ollama run --verbose llama3.1:8b-instruct-q4_0
+
 
 ollama serve
 
@@ -123,7 +125,7 @@ llama3.2:3b-q4					10.32 tokens/s
 
 # Intel N100
 llama3.1:8b-instruct-q8_0		? tokens/s
-llama3.1:8b-instruct-q4_0		? tokens/s
+llama3.1:8b-instruct-q4_0		2.65 tokens/s
 
 # RTX 5060 Ti 16GB: 759 TOPs
 llama3.1:8b-instruct-q8_0		38.66 tokens/s
