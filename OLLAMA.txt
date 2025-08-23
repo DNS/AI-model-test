@@ -128,11 +128,19 @@ llama3.1:8b-instruct-q8_0		2.65 tokens/s
 llama3.1:8b-instruct-q4_0		2.93 tokens/s
 
 # RTX 5060 Ti 16GB: 759 TOPs
+gpt-oss:20b						54.59 tokens/s
 llama3.1:8b-instruct-q8_0		38.66 tokens/s
 llama3.1:8b-instruct-q4_0		60.32 tokens/s
 
 
+# Model size
+gpt-oss:20b						14   GB
+deepseek-r1:14b					 9.0 GB
+llama3.1:8b-instruct-q8_0		 8.5 GB
+llama3.1:8b-instruct-q4_0		 4.7 GB
 
+
+# AI Performance
 RTX 3090			284.7 TOPS
 RTX 3090 Ti			320 TOPS
 RTX 4060 Ti 16GB	353.7 TOPS
@@ -654,6 +662,7 @@ https://github.com/ROCm/ROCm/issues/1073
 There are serious bugs in rocBLAS on gfx803. The last version that officially supported gfx803 was ROCm 3.5. AMD stopped testing on gfx803 after that, and it was badly broken by the ROCm 3.7 release.
 
 AMD doesn't support gfx803 anymore, so the bugs won't be fixed unless someone from the community can debug and patch them.
+
 
 
 
