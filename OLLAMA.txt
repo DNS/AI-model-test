@@ -43,26 +43,6 @@ OLLAMA_LLM_LIBRARY=cpu_avx
 
 --------------------
 
-
-# install other ai models
-https://ollama.com/library?sort=popular
-
-# llama3.1 (facebook)
-ollama run llama3.1:8b			# 4.7GB
-
-# tinyllama (facebook)
-ollama run tinyllama:1.1b		# 638MB
-
-# phi3 (microsoft)
-ollama run phi3:3.8b			# 2.2GB
-
-# qwen2 (alibaba)
-ollama run qwen2:0.5b			# 352MB
-ollama run qwen2:1.5b			# 935MB
-
-ollama run qwen2:0.5b --verbose
-
-
 -------------------
 
 # cost to write 100000 token
@@ -139,6 +119,10 @@ gpt-oss:20b						14   GB
 deepseek-r1:14b					 9.0 GB
 llama3.1:8b-instruct-q8_0		 8.5 GB
 llama3.1:8b-instruct-q4_0		 4.7 GB
+tinyllama:1.1b					638 MB
+phi3:3.8b						2.2 GB
+qwen2:0.5b						352 MB
+qwen2:1.5b						935 MB
 
 
 # AI Performance
@@ -663,6 +647,7 @@ https://github.com/ROCm/ROCm/issues/1073
 There are serious bugs in rocBLAS on gfx803. The last version that officially supported gfx803 was ROCm 3.5. AMD stopped testing on gfx803 after that, and it was badly broken by the ROCm 3.7 release.
 
 AMD doesn't support gfx803 anymore, so the bugs won't be fixed unless someone from the community can debug and patch them.
+
 
 
 
