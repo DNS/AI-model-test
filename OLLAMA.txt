@@ -15,6 +15,9 @@ ollama serve
 ollama list
 ollama rm <model name>
 
+# disable gpu in active prompt
+/set parameter num_gpu 0
+
 -----------------
 # parameter
 
@@ -86,6 +89,7 @@ https://www.eatyourbytes.com/list-of-desktop-gpus-by-generative-ai-tops/
 
 # AMD FX-8300 8-Core CPU
 llama3.1:8b-instruct-q8_0		1.72 tokens/s		128k (context)
+llama3.1:8b-instruct-q4_0		2.2 tokens/s
 llama3.2:3b-instruct-q8_0		3.73 tokens/s
 llama3.2:3b-instruct-q4_K_M		4.08 tokens/s
 llama3.2:1b-instruct-q8_0		7.03 tokens/s
@@ -647,6 +651,7 @@ https://github.com/ROCm/ROCm/issues/1073
 There are serious bugs in rocBLAS on gfx803. The last version that officially supported gfx803 was ROCm 3.5. AMD stopped testing on gfx803 after that, and it was badly broken by the ROCm 3.7 release.
 
 AMD doesn't support gfx803 anymore, so the bugs won't be fixed unless someone from the community can debug and patch them.
+
 
 
 
