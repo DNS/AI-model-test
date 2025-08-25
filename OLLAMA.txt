@@ -15,15 +15,26 @@ ollama serve
 ollama list
 ollama rm <model name>
 
+-----------------
+
+# parameter
+
 # disable gpu in active prompt
 /set parameter num_gpu 0
 
------------------
-# parameter
-
+# set context size
 /set parameter num_ctx 30000
 /set parameter num_ctx 16384
 /set parameter num_ctx 128000
+
+# clear context (forget previous chat)
+/clear
+
+
+
+-----------------
+
+
 
 
 Llama3 70b has 8k context, not 128k
@@ -651,6 +662,7 @@ https://github.com/ROCm/ROCm/issues/1073
 There are serious bugs in rocBLAS on gfx803. The last version that officially supported gfx803 was ROCm 3.5. AMD stopped testing on gfx803 after that, and it was badly broken by the ROCm 3.7 release.
 
 AMD doesn't support gfx803 anymore, so the bugs won't be fixed unless someone from the community can debug and patch them.
+
 
 
 
