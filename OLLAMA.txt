@@ -121,6 +121,10 @@ llama3.1:8b-q4					4.75 tokens/s
 llama3.2:3b-instruct-q8_0		8.76 tokens/s
 llama3.2:3b-q4					10.32 tokens/s
 llama3.2:3b-instruct-q4_0		12.02 tokens/s
+llama3.2:1b-instruct-q8_0		21.18 tokens/s
+llama3.2:1b-instruct-q4_K_M		40.61 tokens/s
+
+
 
 # Intel N100
 llama3.1:8b-instruct-q8_0		2.65 tokens/s
@@ -666,6 +670,7 @@ https://github.com/ROCm/ROCm/issues/1073
 There are serious bugs in rocBLAS on gfx803. The last version that officially supported gfx803 was ROCm 3.5. AMD stopped testing on gfx803 after that, and it was badly broken by the ROCm 3.7 release.
 
 AMD doesn't support gfx803 anymore, so the bugs won't be fixed unless someone from the community can debug and patch them.
+
 
 
 
