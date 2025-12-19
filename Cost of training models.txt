@@ -1,0 +1,10 @@
+"She was trained on a custom curated dataset of 6,000 conversations in ShareGPT/Vicuna format."
+That's fine tuning. No way you can train a new LLM model from scratch with such small dataset.
+In order to train a LLM from scratch, You need money, resource, knowledge, and time.
+For example, Falcon-40B was trained on 384 A100 40GB GPUs, and it took them two months.
+If you rent $2.0/hr, that's $1,105,920.
+$2.0 * 384 gpus * 24 hours * 30 days * 2 months = $1,105,920
+Falcon-7B was trained on 384 A100 40GB GPUs, and it took them two weeks.
+$2.0 * 384 gpus * 24 hours * 14 days = $258,048
+Not to mention, companies probably won't rent that kind of resource to just random individuals even if you have the money.
+
