@@ -8,6 +8,7 @@ Is a kilo of feathers heavier than a pound of steel?
 Model						| Answer		| Pass
 ----------------------------|---------------|-----
 ChatGPT 21/1/2026			| Yes			| ✅
+Copilot						| Yes			| ✅
 GPT-5 mini					| Yes/No		| ❌
 GPT-4o mini					| Yes/No		| ❌
 GPT-OSS 120B				| Yes			| ✅
