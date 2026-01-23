@@ -1,9 +1,10 @@
 ## artificialanalysis.ai - 23/1/2026
 
-
 Model             | Coding Index | Price
 ------------------|--------------|-----
 claude-4.5-opus   | 48           | 5
+gemini-3-pro      | 46           | 2
+gemini-3-flash    | 43           | 0.5
 claude-4.5-sonnet | 39           | 3
 deepseek-v3.2     | 37           | 1.19
 gpt-5             | 36           | 1.25
