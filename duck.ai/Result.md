@@ -10,6 +10,7 @@ Model                        | Answer        | Pass
 Gemini 3 - 22/1/2026         | Yes           | ✅
 ChatGPT-21/1/2026            | Yes           | ✅
 Copilot (GPT-5)              | Yes           | ✅
+GPT-5                        | Yes           | ✅
 GPT-5 mini                   | Yes/No        | ❌
 GPT-4o mini                  | Yes/No        | ❌
 GPT-OSS 120B                 | Yes           | ✅
