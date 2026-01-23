@@ -14,6 +14,7 @@ GPT-5                        | Yes           | ✅
 GPT-5 mini                   | Yes/No        | ❌
 GPT-4o mini                  | Yes/No        | ❌
 GPT-OSS 120B                 | Yes           | ✅
+GPT-OSS 20B                  | Yes/No 80%    | ❌
 Claude H 3.5                 | No            | ❌
 Mistral S 3                  | No            | ❌
 deepseek-r1:1.5b             | No            | ❌
