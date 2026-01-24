@@ -21,7 +21,7 @@ deepseek-r1:1.5b             | No            | ❌
 Llama 4 Scout                | No            | ❌
 Llama 3.3 70b                | No            | ❌
 llama3.1:8b-instruct-q8_0    | Yes/No 40%    | ❌
-llama3.2:3b-instruct-q8_0    | No            | ❌
+llama3.2:3b-instruct-q8_0    | Yes/No 10%    | ❌
 llama3.2:1b-instruct-q4_K_M  | No            | ❌
 R1T2 Chimera                 | Yes           | ✅
 R1T Chimera                  | Yes/No        | ❌
