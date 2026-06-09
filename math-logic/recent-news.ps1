@@ -9,7 +9,7 @@ $question = "Give very brief answer. Who is the current president of Indonesia?"
 	
 	
 $models | % { 
-	$_
+	'Model: ' + $_
     $question | ollama --verbose run $_ 
 }
 
